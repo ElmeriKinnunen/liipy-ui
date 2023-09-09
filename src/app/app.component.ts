@@ -13,7 +13,7 @@ import { IfacilitiesInput, IfacilitiesResponse } from 'src/types';
 export class AppComponent implements OnInit {
   title = 'liipy-ui';
   private ngUnsubscribe = new Subject<void>;
-  items: IfacilitiesResponse[] = [];
+  items: any = [] //TODO change any
 
   constructor( private service: FacilityService ) {}
 
@@ -23,11 +23,12 @@ export class AppComponent implements OnInit {
       ids: [992, 990, 755, 619]
     }
 
-    this.service
-    .watchFacilities(args)
-    .pipe(take(1))
-    .subscribe((facilities) => {
-      this.items = facilities
+    this.service.watchFacilities(args).subscribe((facilities) => { 
+      this.service
+      .fetchAllFacilityDetails(facilities.facilities) //TODO move all the logic behind this function
+      .subscribe((facilityDetails) => {
+        this.items = facilityDetails
+      });
     });
   }
 

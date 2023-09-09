@@ -84,6 +84,6 @@ export interface IfacilityListItem {
     name: string;
     builtCapacityCar?: number;
     builtCapacityElectricCar?: number;
-    apacesAvailable?: number;
-    timeStamp?: Date;
+    spacesAvailable?: number;
+    timeStamp?: string;
 }
