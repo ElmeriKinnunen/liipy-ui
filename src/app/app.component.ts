@@ -18,17 +18,10 @@ export class AppComponent implements OnInit {
   constructor( private service: FacilityService ) {}
 
   async ngOnInit() {
-    const args: IfacilitiesInput = {
-      statuses: ["IN_OPERATION"],
-      ids: [992, 990, 755, 619]
-    }
-
-    this.service.watchFacilities(args).subscribe((facilities) => { 
-      this.service
-      .fetchAllFacilityDetails(facilities.facilities) //TODO move all the logic behind this function
-      .subscribe((facilityDetails) => {
-        this.items = facilityDetails
-      });
+    this.service
+    .fetchAllFacilityDetails() //TODO move all the logic behind this function
+    .subscribe((facilityDetails) => {
+      this.items = facilityDetails
     });
   }
 

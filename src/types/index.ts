@@ -13,7 +13,7 @@ export interface IfacilityResponse {
     hubId?: number | string;
 }
 
-export interface IfacilitiesInput {
+export interface IfacilitiesInput{
     after?: string;
     pageSize?: number;
     sortBy?: string;
@@ -22,6 +22,7 @@ export interface IfacilitiesInput {
     ids?: Array<number | string>;
     geometry?: string;
     maxDistance?: number;
+    listName?: string;
 }
 
 export interface IfacilitiesResponse {
@@ -78,7 +79,10 @@ export interface ICrs {
 export interface ICrsName {
     name: string;
 }
-
+export interface IfacilityList { 
+    listName?: string;
+    items: Array<IfacilityListItem>;
+}
 export interface IfacilityListItem {
     id: number | string;
     name: string;
