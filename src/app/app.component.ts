@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FacilityService } from './services/facility-service';
-import { Subject, take, takeUntil } from 'rxjs';
-import { IfacilitiesInput, IfacilitiesResponse } from 'src/types';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +18,7 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.service
-    .fetchAllFacilityDetails() //TODO move all the logic behind this function
+    .fetchAllFacilityDetails()
     .subscribe((facilityDetails) => {
       this.items = facilityDetails
     });

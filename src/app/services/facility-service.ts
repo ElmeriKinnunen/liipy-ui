@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Apollo } from "apollo-angular";
 import * as dayjs from "dayjs";
-import { Observable, catchError, combineLatest, forkJoin, map, mergeMap, take, tap, throwError } from "rxjs";
+import { Observable, forkJoin, map, mergeMap, take } from "rxjs";
 import { GET_FACILITIES, GET_FACILITY } from "src/graphql/queries";
-import { IFacility, IfacilitiesInput, IfacilitiesResponse, IfacilityInput, IfacilityListItem, IfacilityResponse } from "src/types";
+import { IfacilitiesInput, IfacilitiesResponse, IfacilityInput, IfacilityList, IfacilityListItem, IfacilityResponse } from "src/types";
 
 @Injectable({
   providedIn: "root",
@@ -65,29 +65,32 @@ export class FacilityService {
   }
 
   // get multiple lists of listItems
-  fetchAllFacilityDetails(): Observable<IfacilityListItem[][]> {
+  fetchAllFacilityDetails(): Observable<IfacilityList> {
     const lists: Array<IfacilitiesInput> = [
       {
         statuses: ["IN_OPERATION"],
         ids: [992, 990, 755, 619],
-        listName: "Helsinki",
+        listName: "Läsniväylä",
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [517, 1006, 303, 1233],
-        listName: "Espoo",
+        ids: [444, 1006, 303, 1233],//placeholder IDs
+        listName: "Lähijuna länteent",
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [1091, 751, 619, 1047],
-        listName: "Vantaa",
+        ids: [1091, 751, 619, 1047], //placeholder IDs
+        listName: "Lähijuna itään",
       },
     ];
   
-    const observables = lists.map((list) => this.fetchFacilityList(list));
-  
-    return forkJoin(observables);
+    const observables = lists.map((list) =>
+      this.fetchFacilityList(list).pipe(
+      map((result) => ({ [list.listName as string]: result }))
+    ));
+
+    return forkJoin(observables).pipe(
+      map((results) => Object.assign({}, ...results))
+    );
   }
-
 }
-
