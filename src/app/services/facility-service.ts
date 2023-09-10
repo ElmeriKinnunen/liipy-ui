@@ -53,7 +53,7 @@ export class FacilityService {
                 builtCapacityCar: facility.builtCapacity?.CAR,
                 builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
                 spacesAvailable: facilityData.spacesAvailable,
-                timeStamp: dayjs(new Date(facilityData.timestamp)).format('DD-MM-YYYY HH:mm'),
+                timestamp: dayjs(new Date(facilityData.timestamp)).format('DD-MM-YYYY HH:mm'),
               };
             })
           )
@@ -65,7 +65,7 @@ export class FacilityService {
   }
 
   // get multiple lists of listItems
-  fetchAllFacilityDetails(): Observable<IfacilityList> {
+  fetchAllFacilityDetails(): Observable<IfacilityList[]> {
     const lists: Array<IfacilitiesInput> = [
       {
         statuses: ["IN_OPERATION"],
@@ -86,11 +86,12 @@ export class FacilityService {
   
     const observables = lists.map((list) =>
       this.fetchFacilityList(list).pipe(
-      map((result) => ({ [list.listName as string]: result }))
-    ));
+        map((result) => ({ listName: list.listName as string, items: result }))
+      )
+    );
 
     return forkJoin(observables).pipe(
-      map((results) => Object.assign({}, ...results))
+      map((results) => results)
     );
   }
 }

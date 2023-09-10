@@ -91,5 +91,5 @@ export interface IfacilityListItem {
     builtCapacityCar?: number;
     builtCapacityElectricCar?: number;
     spacesAvailable?: number;
-    timeStamp?: string;
+    timestamp?: string;
 }

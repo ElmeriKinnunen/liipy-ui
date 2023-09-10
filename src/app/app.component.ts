@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     .fetchAllFacilityDetails()
     .subscribe((facilityDetails) => {
       this.items = facilityDetails
+    console.log(this.items)
     });
   }
 
