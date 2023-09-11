@@ -1,19 +1,20 @@
-<h1>Liipy</h1>
+<div class="bg-white border-b dark:bg-gray-900 dark:text-white">
+<h1 class="p-4 text-4xl font-semibold tracking-widest uppercase">Liipy</h1>
 <!-- <pre>{{  items | json}}</pre> -->
 
-<div *ngFor="let item of items" class="max-w-5xl mx-auto">
+<div *ngFor="let item of items" class="max-w-5xl mx-auto mb-12">
 	<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 		<div class="p-4">
-      <h2>{{ item.listName }}</h2>
+      <h2 class="text-xl font-light">{{ item.listName }}</h2>
 			</div>
 			<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 					<tr>
 						<th scope="col" class="px-6 py-3">
-							ID
-						</th>
-						<th scope="col" class="px-6 py-3">
 							Nimi
+						</th>
+            <th scope="col" class="px-6 py-3">
+							Tilaa nyt
 						</th>
 						<th scope="col" class="px-6 py-3">
 							Autojen kapasitetti
@@ -21,23 +22,17 @@
 						<th scope="col" class="px-6 py-3">
 							Sähköautojen kapasitettti
 						</th>
-            <th scope="col" class="px-6 py-3">
-							Tilaa
-						</th>
-            <th scope="col" class="px-6 py-3">
-							aika
-						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr
           *ngFor="let facility of item.items"
 						class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-						<th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-							{{ facility.id }}
-						</th>
 						<td class="px-6 py-4">
 							{{ facility.name }}
+						</td>
+            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+							{{ facility.spacesAvailable }}
 						</td>
 						<td class="px-6 py-4">
 							{{ facility.builtCapacityCar }}
@@ -45,15 +40,10 @@
 						<td class="px-6 py-4">
 							{{ facility.builtCapacityElectricCar }}
 						</td>
-            <td class="px-6 py-4">
-							{{ facility.spacesAvailable }}
-						</td>
-            <td class="px-6 py-4">
-							{{ facility.timestamp }}
-						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+</div>
 <router-outlet></router-outlet>

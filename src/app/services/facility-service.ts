@@ -58,8 +58,10 @@ export class FacilityService {
             })
           )
         );
-  
         return forkJoin(facilityObservables);
+        return forkJoin(facilityObservables).pipe(
+          map((items) => items.filter(item => item.spacesAvailable !== undefined))
+        );
       })
     );
   }
@@ -69,18 +71,28 @@ export class FacilityService {
     const lists: Array<IfacilitiesInput> = [
       {
         statuses: ["IN_OPERATION"],
-        ids: [992, 990, 755, 619],
-        listName: "Läsniväylä",
+        ids: [1286, 1167, 1233, 992, 1006, 1009, 990, 755, 619],
+        listName: "Länsimetro",
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [444, 1006, 303, 1233],//placeholder IDs
-        listName: "Lähijuna länteent",
+        ids: [751, 747, 738, 1, 308],//placeholder IDs
+        listName: "Lähijuna pohjoinen",
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [1091, 751, 619, 1047], //placeholder IDs
-        listName: "Lähijuna itään",
+        ids: [473], //placeholder IDs
+        listName: "Lähijuna länsi",
+      },
+      {
+        statuses: ["IN_OPERATION"],
+        ids: [303, 41], //placeholder IDs
+        listName: "Lähijuna itä",
+      },
+      {
+        statuses: ["IN_OPERATION"],
+        ids: [512, 1047, 517, 1091, 1031, 507, 497, 1090], //placeholder IDs
+        listName: "Itähelsinki",
       },
     ];
   
