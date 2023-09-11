@@ -1,14 +1,14 @@
-<div class="bg-white border-b dark:bg-gray-900 dark:text-white">
+<div class="bg-gray-50 dark:bg-gray-900 dark:text-white">
 <h1 class="p-4 text-4xl font-semibold tracking-widest uppercase">Liipy</h1>
 <!-- <pre>{{  items | json}}</pre> -->
 
-<div *ngFor="let item of items" class="max-w-5xl mx-auto mb-12">
+<div *ngFor="let item of items" class="max-w-5xl mx-auto pb-12">
 	<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 		<div class="p-4">
       <h2 class="text-xl font-light">{{ item.listName }}</h2>
 			</div>
 			<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+				<thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
 					<tr>
 						<th scope="col" class="px-6 py-3">
 							Nimi
@@ -16,10 +16,10 @@
             <th scope="col" class="px-6 py-3">
 							Tilaa nyt
 						</th>
-						<th scope="col" class="px-6 py-3">
+						<th scope="col" class="px-6 py-3 hide">
 							Autojen kapasitetti
 						</th>
-						<th scope="col" class="px-6 py-3">
+						<th scope="col" class="px-6 py-3 hide">
 							Sähköautojen kapasitettti
 						</th>
 					</tr>
@@ -34,16 +34,20 @@
             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
 							{{ facility.spacesAvailable }}
 						</td>
-						<td class="px-6 py-4">
+						<td class="px-6 py-4 hide">
 							{{ facility.builtCapacityCar }}
 						</td>
-						<td class="px-6 py-4">
+						<td class="px-6 py-4 hide">
 							{{ facility.builtCapacityElectricCar }}
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+    <span class="text-xs text-gray-700 dark:text-gray-400">( {{item.items[0].timestamp}} )</span>
 	</div>
+</div>
+<div class="dark:bg-gray-800 text-center text-xs p-4 text-gray-700 ">
+  <p class="text-gray-700 dark:text-gray-400 ">Tieto vapaista paikoista on HSL:n arvio viiden (5) minuutin tarkkuudella. Ylläpito ei vastaa tietojen oikeellisuudesta. Datan tuottaa HSL</p>
 </div>
 <router-outlet></router-outlet>

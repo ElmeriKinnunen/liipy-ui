@@ -2,3 +2,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.hide {
+    @media (max-width: 640px) {
+        display: none;
+    }
+}

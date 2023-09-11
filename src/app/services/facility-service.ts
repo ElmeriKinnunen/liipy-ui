@@ -53,7 +53,7 @@ export class FacilityService {
                 builtCapacityCar: facility.builtCapacity?.CAR,
                 builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
                 spacesAvailable: facilityData.spacesAvailable,
-                timestamp: dayjs(new Date(facilityData.timestamp)).format('DD-MM-YYYY HH:mm'),
+                timestamp: dayjs(new Date(facilityData.timestamp)).format('DD.MM.YYYY HH:mm'),
               };
             })
           )
@@ -72,27 +72,27 @@ export class FacilityService {
       {
         statuses: ["IN_OPERATION"],
         ids: [1286, 1167, 1233, 992, 1006, 1009, 990, 755, 619],
-        listName: "Länsimetro",
-      },
-      {
-        statuses: ["IN_OPERATION"],
-        ids: [751, 747, 738, 1, 308],//placeholder IDs
-        listName: "Lähijuna pohjoinen",
-      },
-      {
-        statuses: ["IN_OPERATION"],
-        ids: [473], //placeholder IDs
-        listName: "Lähijuna länsi",
-      },
-      {
-        statuses: ["IN_OPERATION"],
-        ids: [303, 41], //placeholder IDs
-        listName: "Lähijuna itä",
+        listName: "Metro (Länsi)",
       },
       {
         statuses: ["IN_OPERATION"],
         ids: [512, 1047, 517, 1091, 1031, 507, 497, 1090], //placeholder IDs
-        listName: "Itähelsinki",
+        listName: "Metro (Itä)",
+      },
+      {
+        statuses: ["IN_OPERATION"],
+        ids: [473], //placeholder IDs
+        listName: "Lähijuna (Länsi)",
+      },
+      {
+        statuses: ["IN_OPERATION"],
+        ids: [751, 747, 738, 1, 308],//placeholder IDs
+        listName: "Lähijuna (Pohjoinen)",
+      },
+      {
+        statuses: ["IN_OPERATION"],
+        ids: [303, 41], //placeholder IDs
+        listName: "Lähijuna (Itä)",
       },
     ];
   
