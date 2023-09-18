@@ -11,7 +11,7 @@ import packageJson from '../../package.json';
 
 
 export class AppComponent implements OnInit {
-  title = 'liipy-ui';
+  title = 'Liipy';
   appVersion: string = packageJson.version;
   private ngUnsubscribe = new Subject<void>;
   items: any = [] //TODO change any
@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
     .fetchAllFacilityDetails()
     .subscribe((facilityDetails) => {
       this.items = facilityDetails
-    console.log(this.items)
     });
   }
 

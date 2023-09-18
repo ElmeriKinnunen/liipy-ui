@@ -59,9 +59,9 @@ export class FacilityService {
           )
         );
         return forkJoin(facilityObservables);
-        return forkJoin(facilityObservables).pipe(
-          map((items) => items.filter(item => item.spacesAvailable !== undefined))
-        );
+        // return forkJoin(facilityObservables).pipe(
+        //   map((items) => items.filter(item => item.spacesAvailable !== undefined))
+        // );
       })
     );
   }
