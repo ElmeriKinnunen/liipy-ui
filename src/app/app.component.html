@@ -1,14 +1,17 @@
-<div class="bg-gray-50 dark:bg-gray-900 dark:text-white">
-<h1 class="p-4 text-4xl font-semibold tracking-widest uppercase">Liipy</h1>
+<div class="bg-gray-50">
+	<div class="flex p-4">
+		<h1 class="text-4xl font-semibold tracking-widest uppercase">Liipy</h1>
+		<span class="text-xs self-end">{{ appVersion }}</span>
+	</div>
 <!-- <pre>{{  items | json}}</pre> -->
 
 <div *ngFor="let item of items" class="max-w-5xl mx-auto pb-6 p-4">
-	<div class="relative overflow-x-auto shadow-md rounded-xl">
+	<div class="relative overflow-x-auto drop-shadow-lg rounded-xl">
 		<div class="pt-3 pl-6 bg-white">
       <h2 class="text-xl font-bold">{{ item.listName }}</h2>
 			</div>
-			<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-				<thead class="text-xs text-gray-700 bg-white dark:bg-gray-700 dark:text-gray-400 border-b">
+			<table class="w-full text-sm text-left text-gray-500">
+				<thead class="text-xs text-gray-700 bg-white border-b">
 					<tr>
 						<th scope="col" class="px-6 py-2 font-light">
 							Nimi
@@ -27,11 +30,11 @@
 				<tbody>
 					<tr
           *ngFor="let facility of item.items"
-						class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+						class="bg-white border-b hover:bg-gray-50">
 						<td class="px-6 py-4">
 							{{ facility.name }}
 						</td>
-            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
 							{{ facility.spacesAvailable }}
 						</td>
 						<td class="px-6 py-4 hide">
@@ -44,10 +47,10 @@
 				</tbody>
 			</table>
 		</div>
-    <span class="text-xs text-gray-700 dark:text-gray-400">( {{item.items[0].timestamp}} )</span>
+    <span class="text-xs text-gray-400">( {{item.items[0].timestamp}} )</span>
 	</div>
 </div>
-<div class="dark:bg-gray-800 text-center text-xs p-4 text-gray-700 ">
-  <p class="text-gray-700 dark:text-gray-400 ">Tieto vapaista paikoista on HSL:n arvio viiden (5) minuutin tarkkuudella. Ylläpito ei vastaa tietojen oikeellisuudesta. Datan tuottaa HSL</p>
+<div class="text-center text-xs p-4 text-gray-700 ">
+  <p class="text-gray-700">Tieto vapaista paikoista on HSL:n arvio viiden (5) minuutin tarkkuudella. Ylläpito ei vastaa tietojen oikeellisuudesta. Datan tuottaa HSL</p>
 </div>
 <router-outlet></router-outlet>

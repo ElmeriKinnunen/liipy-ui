@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FacilityService } from './services/facility-service';
 import { Subject } from 'rxjs';
+import packageJson from '../../package.json';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { Subject } from 'rxjs';
 
 export class AppComponent implements OnInit {
   title = 'liipy-ui';
+  appVersion: string = packageJson.version;
   private ngUnsubscribe = new Subject<void>;
   items: any = [] //TODO change any
 

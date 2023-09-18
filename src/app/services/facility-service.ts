@@ -76,22 +76,22 @@ export class FacilityService {
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [512, 1047, 517, 1091, 1031, 507, 497, 1090], //placeholder IDs
+        ids: [512, 1047, 517, 1091, 1031, 507, 497, 1090],
         listName: "Metro (Itä)",
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [473], //placeholder IDs
+        ids: [473],
         listName: "Lähijuna (Länsi)",
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [751, 747, 738, 1, 308],//placeholder IDs
+        ids: [751, 747, 738, 1, 308],
         listName: "Lähijuna (Pohjoinen)",
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [303, 41], //placeholder IDs
+        ids: [303, 41],
         listName: "Lähijuna (Itä)",
       },
     ];
