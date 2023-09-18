@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FacilityService } from './services/facility-service';
 import { Subject } from 'rxjs';
 import packageJson from '../../package.json';
+import { inject } from '@vercel/analytics';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   constructor( private service: FacilityService ) {}
 
   async ngOnInit() {
+    inject();
     this.service
     .fetchAllFacilityDetails()
     .subscribe((facilityDetails) => {
