@@ -5,17 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from 'src/graphql/graphql.module';
 import { FacilityService } from './services/facility-service';
+import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
+import { CookieService } from 'ngx-cookie-service';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { FacilitiesComponent } from './facilities/facilities.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CookieBannerComponent,
+    PrivacyPolicyComponent,
+    FacilitiesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     GraphQLModule
   ],
-  providers: [FacilityService],
+  providers: [FacilityService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

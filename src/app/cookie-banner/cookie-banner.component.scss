@@ -1,0 +1,21 @@
+.cookie-banner-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Change to your desired background color */
+    color: #fff; /* Change to your desired text color */
+    padding: 10px; /* Add padding for better appearance */
+    text-align: center;
+    z-index: 9999; /* Ensure it's on top of other content */
+  }
+  
+  /* Style the "Accept" and "Reject" buttons as needed */
+  .cookie-banner button {
+    background-color: #007bff; /* Change to your desired button color */
+    color: #fff; /* Change to your desired button text color */
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+  }

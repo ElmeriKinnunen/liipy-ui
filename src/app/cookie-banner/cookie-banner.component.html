@@ -1,0 +1,8 @@
+<div class="cookie-banner-container" *ngIf="!cookiesAccepted && !cookiesSettingSaved">
+    <div class="cookie-banner">
+      <p>Hyväksymällä keksit autat sivuston kehitystä</p>
+      <button class="outline rounded-lg" (click)="acceptCookies()">Accept</button>
+      <button class="rounded-lg" (click)="rejectCookies()">Reject</button>
+      <a class="text-xs underline underline-offset-2" routerLink="privacy">Lisätietoa evästeistä</a>
+    </div>
+  </div>
