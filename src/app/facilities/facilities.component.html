@@ -1,9 +1,10 @@
 <div class="bg-gray-50">
 	<div class="flex p-4">
-		<h1 class="text-xl font-semibold tracking-widest uppercase">Liityntäpysäköinnin reaaliaikainen paikkatilanne</h1>
+		<span class="text-4xl font-semibold tracking-widest uppercase">Liipy</span>
 		<span class="text-xs self-end">{{ appVersion }}</span>
 	</div>
 <!-- <pre>{{  items | json}}</pre> -->
+<h1 class="text-xl font-semibold text-center">Liityntäpysäköinnin reaaliaikainen paikkatilanne</h1>
 
 <div *ngIf="items.length; else loading">
     <div *ngFor="let item of items" class="max-w-5xl mx-auto pb-6 p-4">
@@ -59,6 +60,29 @@
     </div>
   </ng-template>
 
-<div class="text-center text-xs p-4 text-gray-700 ">
+  <div class="max-w-5xl mx-auto pb-6 p-4">
+    <h3 class="text-2xl font-semibold pt-6 pb-4">Tervetuloa liityntäpysäköinnin reaaliaikaisen tilanteen seurannan sivustolle!</h3> 
+    <p>Täältä voit helposti tarkistaa, kuinka paljon parkkipaikkoja on vapaana metron ja junan läheisyydessä HSL:n alueella. 
+    Liityntäpysäköinti on olennainen osa sujuvaa ja ekologista liikkumista, ja me haluamme tehdä siitä mahdollisimman helppoa sinulle. 
+    Listattuna on ainoastaa pysäköintitilat, joista Hsl tarjoaa tilanneseurannan. Pysäköintitila voi olla pysälöintikenttä tai -laitos. </p>
+
+    <h3 class="text-2xl font-semibold pt-6 pb-4">Liityntäpysäköinti helpottaa matkaasi</h3>
+    <p>Liityntäpysäköinti tarjoaa sinulle mahdollisuuden jättää autosi turvallisesti pysäköintialueelle ja 
+        jatkaa matkaasi julkisilla kulkuvälineillä. Tämä ei vain vähennä liikenteen ruuhkia, vaan myös auttaa 
+        vähentämään päästöjä ja tekee liikkumisesta ympäristöystävällisempää.</p>
+
+    <h3 class="text-2xl font-semibold pt-6 pb-4">Miksi käyttää Liipyä?</h3>
+    <p>Näet reaaliaikaisen tilanteen, kuinka monta parkkipaikkaa on tällä hetkellä vapaana. Tämä auttaa sinua suunnittelemaan matkasi niin,
+    että löydät helposti lähimmän liityntäpysäköinti alueen, jossa on vielä tilaa. Kun tiedät etukäteen kuinka paljon parkkipaikkoja on vapaana, säästät aikaa ja vaivaa, kun et joudu etsimään vapaata pysäköintialuetta.</p>
+    <p class="pt-4">Reaaliaikaisen tilanneseurannan avulla voit tehdä älykkäämpiä päätöksiä liikenteessä. Voit välttää turhia ajoja etsimällä parkkipaikkaa 
+    ja voit suunnitella matkasi niin, että se sujuu mahdollisimman vaivattomasti. Ethän kuitenkaan käytä älylaitetta ajaessa!</p>
+
+    <h3 class="text-2xl font-semibold pt-6 pb-4">Liityntäpysäköinti on tulevaisuutta</h3>
+    <p>Liityntäpysäköinti on tulevaisuuden liikkumisen avain, ja me haluamme auttaa sinua hyödyntämään sitä täysimääräisesti. 
+    Seuraa reaaliaikaista tilannetta ja tee matkastasi sujuva ja ympäristöystävällinen kokemus.
+    Tervetuloa liityntäpysäköinnin maailmaan, jossa liikkuminen on helpompaa ja ympäristöystävällisempää kuin koskaan!</p>
+  </div>
+
+<div class="text-center text-xs p-4 text-gray-700 bg-gray-50">
   <p class="text-gray-700">Tieto vapaista paikoista on HSL:n arvio viiden (5) minuutin tarkkuudella. Ylläpito ei vastaa tietojen oikeellisuudesta. Datan tuottaa HSL</p>
 </div>
