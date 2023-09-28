@@ -15,7 +15,7 @@ export class FacilitiesComponent {
 
   constructor( private service: FacilityService ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.service
     .fetchAllFacilityDetails()
     .subscribe((facilityDetails) => {
