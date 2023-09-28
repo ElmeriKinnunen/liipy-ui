@@ -27,11 +27,11 @@ export class FacilityService {
   // get single facility with details
   watchFacility(variables: IfacilityInput): Observable<IfacilityResponse> {
     return this.gql
-      .query<{ facilityPrediction: IfacilityResponse }>({
+      .watchQuery<{ facilityPrediction: IfacilityResponse }>({
         query: GET_FACILITY,
         variables,
       })
-      .pipe(
+      .valueChanges.pipe(
         map((res) => res.data.facilityPrediction),
       );
   }
