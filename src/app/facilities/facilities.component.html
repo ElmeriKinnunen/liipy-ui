@@ -18,23 +18,23 @@
     <h2 class="text-xl font-semibold pt-6 pb-4">Miksi käyttää Liipyä?</h2>
     <p class="text-sm">Näet reaaliaikaisen tilanteen, kuinka monta parkkipaikkaa on tällä hetkellä vapaana. Tämä auttaa sinua suunnittelemaan matkasi niin,
     että löydät helposti lähimmän liityntäpysäköinti alueen, jossa on vielä tilaa. Kun tiedät etukäteen kuinka paljon parkkipaikkoja on vapaana, säästät aikaa ja vaivaa, kun et joudu etsimään vapaata pysäköintialuetta.</p>
-    <p class="pt-4 text-sm">Reaaliaikaisen tilanneseurannan avulla voit tehdä älykkäämpiä päätöksiä liikenteessä. Voit välttää turhia ajoja etsimällä parkkipaikkaa 
-    ja voit suunnitella matkasi niin, että se sujuu mahdollisimman vaivattomasti. Ethän kuitenkaan käytä älylaitetta ajaessa!</p>
+    <p class="pt-4 text-sm">Reaaliaikaisen tilanneseurannan avulla voit tehdä älykkäämpiä päätöksiä liikenteessä. Et käytä turhaa aikaa parkkipaikan etsimiseen 
+    ja voit suunnitella matkasi niin, että se sujuu mahdollisimman vaivattomasti. Älä kuitenkaan käytä Liipyä ajaessa!</p>
 
-    <h2 class="text-xl font-semibold pt-6 pb-4">Liityntäpysäköinti on tulevaisuutta</h2>
-    <p class="text-sm">Liityntäpysäköinti on tulevaisuuden liikkumisen avain, ja me haluamme auttaa sinua hyödyntämään sitä täysimääräisesti. 
+    <h2 class="text-xl font-semibold pt-6 pb-4">Liityntäpysäköinti on nykypäivää</h2>
+    <p class="text-sm">Liityntäpysäköinti on nykypäivänä liikkumisen avain, ja me haluamme auttaa sinua hyödyntämään sitä täysimääräisesti. 
     Seuraa reaaliaikaista tilannetta ja tee matkastasi sujuva ja ympäristöystävällinen kokemus.
     Tervetuloa liityntäpysäköinnin maailmaan, jossa liikkuminen on helpompaa ja ympäristöystävällisempää kuin koskaan!</p>
   </div>
 
 <h3 class="text-xl font-semibold text-center">Liityntäpysäköinnin reaaliaikainen paikkatilanne</h3>
 
-<div *ngIf="items.length; else loading">
+<div *ngIf="items.length > 0; else loading">
     <div *ngFor="let item of items" class="max-w-5xl mx-auto pb-6 p-4">
         <div class="relative overflow-x-auto drop-shadow-lg rounded-xl">
             <div class="pt-3 pl-6 bg-white">
-        <h2 class="text-xl font-bold">{{ item.listName }}</h2>
-                </div>
+                <h2 class="text-xl font-bold">{{ item.listName }}</h2>
+            </div>
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 bg-white border-b">
                         <tr>
@@ -53,13 +53,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
-            *ngFor="let facility of item.items"
+                        <tr *ngFor="let facility of item.items"
                             class="bg-white border-b hover:bg-gray-50">
                             <td class="px-6 py-4">
                                 {{ facility.name }}
                             </td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 {{ facility.spacesAvailable }}
                             </td>
                             <td class="px-6 py-4 hide">
@@ -74,6 +73,10 @@
             </div>
         <span class="text-xs text-gray-400">( {{item.items[0].timestamp}} )</span>
         </div>
+        <div class="max-w-5xl mx-auto pb-6 p-4">
+            <p class="text-xl">Yhteydenotot </p>
+            <a class="text-sm underline underline-offset-2 hover:text-sky-600" href="mailto:liityntapysakointi@gmail.com?subject:Kysyttävää liipystä">liityntapysakointi@gmail.com</a>
+        </div>
     </div>
 </div>
 
@@ -83,6 +86,7 @@
     </div>
   </ng-template>
 
-<div class="text-center text-xs p-4 text-gray-700 bg-gray-50">
-  <p class="text-gray-700">Tieto vapaista paikoista on HSL:n arvio viiden (5) minuutin tarkkuudella. Ylläpito ei vastaa tietojen oikeellisuudesta. Datan tuottaa HSL</p>
+<div class="text-center text-xs p-4 text-gray-700 bg-white">
+  <p class="text-gray-700">Tieto vapaista paikoista on HSL:n arvio viiden (5) minuutin tarkkuudella. Ylläpito ei vastaa tietojen oikeellisuudesta.</p>
+  <p>© 2023 Liipy</p>
 </div>
