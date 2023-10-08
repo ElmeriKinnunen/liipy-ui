@@ -35,7 +35,7 @@
     <div *ngFor="let item of items" class="max-w-5xl mx-auto pb-6 p-4">
         <div class="relative overflow-x-auto drop-shadow-lg rounded-xl">
             <div class="pt-3 pl-6 bg-white">
-                <h2 class="text-xl font-bold">{{ item.listName }}</h2>
+                <h2 class="text-xl font-semibold">{{ item.listName }}</h2>
             </div>
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 bg-white border-b">
@@ -58,7 +58,7 @@
                         <tr *ngFor="let facility of item.items"
                             class="bg-white border-b hover:bg-gray-50">
                             <td class="px-6 py-4">
-                                {{ facility.name }}
+                                <p>{{ facility.name }}</p>
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 {{ facility.spacesAvailable }}
