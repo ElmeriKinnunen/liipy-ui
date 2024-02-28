@@ -9,13 +9,15 @@ import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 import { CookieService } from 'ngx-cookie-service';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
+import { UserFacilitiesComponent } from './user-facilities/user-facilities.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CookieBannerComponent,
     PrivacyPolicyComponent,
-    FacilitiesComponent
+    FacilitiesComponent,
+    UserFacilitiesComponent
   ],
   imports: [
     BrowserModule,

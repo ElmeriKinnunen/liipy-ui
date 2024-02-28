@@ -23,13 +23,15 @@ export const GET_FACILITIES = gql`
 `
 
 export const GET_FACILITY = gql`
-  query facilityPrediction($id: ID!, $after: Int) {
-    facilityPrediction(id : $id, after: $after) {
-      capacityType
-      usage
-      timestamp
-      spacesAvailable
-      facilityId
+  query facilityUtilization($id: ID!) {
+    facilityUtilization(id : $id) {
+      facilityId,
+      capacityType,
+      usage:,
+      timestamp,
+      spacesAvailable,
+      capacity,
+      openNow,
     }
   }
 `

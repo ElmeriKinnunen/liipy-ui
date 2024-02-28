@@ -1,0 +1,93 @@
+
+<div class="banner-image"></div>
+<div class="bg-gray-50">
+	<div class="flex p-4">
+		<span class="text-2xl font-semibold tracking-widest uppercase">Liipy</span>
+		<span class="text-xs self-end">{{ appVersion }}</span>
+	</div>
+<!-- <pre>{{  items | json}}</pre> -->
+<div class="max-w-5xl mx-auto pb-6 p-4">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3660066816348846"
+     crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3660066816348846"
+        data-ad-slot="9870643865"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+<h3 class="text-xl font-semibold text-center">Liityntäpysäköinnin reaaliaikainen paikkatilanne (beta)</h3>
+
+<div *ngIf="items.length > 0; else loading">
+    <div *ngFor="let item of items" class="max-w-5xl mx-auto pb-6 p-4">
+        <div class="relative overflow-x-auto drop-shadow-lg rounded-xl">
+            <div class="pt-3 pl-6 bg-white">
+                <h2 class="text-xl font-semibold">{{ item.listName }}</h2>
+            </div>
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 bg-white border-b">
+                        <tr>
+                            <th scope="col" class="px-6 py-2 font-light">
+                                Nimi
+                            </th>
+                            <th scope="col" class="px-6 py-2 font-light">
+                                Tilaa nyt
+                            </th>
+                            <th scope="col" class="px-6 py-2 font-light hide">
+                                Autojen kapasitetti
+                            </th>
+                            <th scope="col" class="px-6 py-2 font-light hide">
+                                ID
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let facility of item.items"
+                            class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4">
+                                <p>{{ facility.name }}</p>
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ facility.spacesAvailable }}
+                            </td>
+                            <td class="px-6 py-4 hide">
+                                {{ facility.builtCapacityCar }}
+                            </td>
+                            <td class="px-6 py-4 hide">
+                                {{ facility.id }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        <span class="text-xs text-gray-400">( {{item.items[0].timestamp}} )</span>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <div class="flex items-center justify-center p-6">
+        <p>...ladataan</p>
+    </div>
+  </ng-template>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3660066816348846"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3660066816348846"
+     data-ad-slot="7964813057"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="text-center text-xs p-4 text-gray-700 bg-white">
+  <p class="text-gray-700">Tieto vapaista paikoista on HSL:n arvio viiden (5) minuutin tarkkuudella. Ylläpito ei vastaa tietojen oikeellisuudesta.</p>
+  <p>© 2023 Liipy</p>
+</div>

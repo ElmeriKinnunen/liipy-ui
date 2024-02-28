@@ -27,12 +27,12 @@ export class FacilityService {
   // get single facility with details
   watchFacility(variables: IfacilityInput): Observable<IfacilityResponse> {
     return this.gql
-      .watchQuery<{ facilityPrediction: IfacilityResponse }>({
+      .query<{ facilityUtilization: IfacilityResponse }>({
         query: GET_FACILITY,
         variables,
       })
-      .valueChanges.pipe(
-        map((res) => res.data.facilityPrediction),
+      .pipe(
+        map((res) => res.data.facilityUtilization),
       );
   }
 
@@ -41,7 +41,7 @@ export class FacilityService {
     return this.watchFacilities(args).pipe(
       mergeMap((facilities) => {
         const facilityObservables = facilities.facilities.map((facility) =>
-          this.watchFacility({ id: facility.id, after: 0 }).pipe(
+          this.watchFacility({ id: facility.id}).pipe(
             take(1),
             map((facilityData) => {
               if (Array.isArray(facilityData) && facilityData.length > 0) {
@@ -52,8 +52,8 @@ export class FacilityService {
                 name: facility.name.fi,
                 builtCapacityCar: facility.builtCapacity?.CAR,
                 builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
-                spacesAvailable: facilityData.spacesAvailable,
-                timestamp: dayjs(new Date(facilityData.timestamp)).format('DD.MM.YYYY HH:mm'),
+                spacesAvailable: facilityData?.spacesAvailable,
+                timestamp: facilityData?.usage ? dayjs(new Date(facilityData.usage)).format('DD.MM.YYYY HH:mm') : "",
               };
             })
           )
@@ -93,6 +93,26 @@ export class FacilityService {
         statuses: ["IN_OPERATION"],
         ids: [303, 41],
         listName: "Lähijuna (Itä)",
+      },
+    ];
+  
+    const observables = lists.map((list) =>
+      this.fetchFacilityList(list).pipe(
+        map((result) => ({ listName: list.listName as string, items: result }))
+      )
+    );
+
+    return forkJoin(observables).pipe(
+      map((results) => results)
+    );
+  }
+
+  fetchUserFacilityDetails(): Observable<IfacilityList[]> {
+    const lists: Array<IfacilitiesInput> = [
+      {
+        statuses: ["IN_OPERATION"],
+        ids: [992, 990, 755, 619],
+        listName: "Metro (Länsi)",
       },
     ];
   

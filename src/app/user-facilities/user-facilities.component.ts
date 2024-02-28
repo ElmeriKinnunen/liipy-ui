@@ -4,11 +4,11 @@ import packageJson from '../../../package.json';
 import { FacilityService } from '../services/facility-service';
 
 @Component({
-  selector: 'app-facilities',
-  templateUrl: './facilities.component.html',
-  styleUrls: ['./facilities.component.scss']
+  selector: 'app-user-facilities',
+  templateUrl: './user-facilities.component.html',
+  styleUrls: ['./user-facilities.component.scss']
 })
-export class FacilitiesComponent {
+export class UserFacilitiesComponent {
   appVersion: string = packageJson.version;
   private ngUnsubscribe = new Subject<void>;
   items: any = [] //TODO change any
@@ -17,7 +17,7 @@ export class FacilitiesComponent {
 
   ngOnInit() {
     this.service
-    .fetchAllFacilityDetails()
+    .fetchUserFacilityDetails()
     .subscribe((facilityDetails) => {
       this.items = facilityDetails
     });

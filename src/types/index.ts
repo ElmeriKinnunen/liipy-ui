@@ -1,16 +1,15 @@
 export interface IfacilityInput {
     id: number | string;
-    after?: number;
-    at?: string;
 }
 
 export interface IfacilityResponse {
-    capacityType: string;
-    usage: string;
-    timestamp: string;
-    spacesAvailable?: number;
-    facilityId?: number | string;
-    hubId?: number | string;
+    facilityId: number | string
+    capacityType: string
+    usage: string
+    timestamp?: string
+    spacesAvailable?: number
+    capacity?: number
+    openNow?: Boolean
 }
 
 export interface IfacilitiesInput extends IFacilityListName {
