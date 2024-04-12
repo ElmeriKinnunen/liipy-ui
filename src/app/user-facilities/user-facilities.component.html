@@ -46,6 +46,11 @@
                             class="bg-white border-b hover:bg-gray-50">
                             <td class="px-6 py-4">
                                 <p>{{ facility.name }}</p>
+                                <p 
+                                ngClass="{{ getDateFromString(facility.timestamp) < getDateFromString(comparisonTime) ? 'text-red-500 font-bold' : 'text-green-400' }}"
+                                style="font-size: 0.6rem;">
+                                {{ facility.timestamp }}
+                            </p>
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 {{ facility.spacesAvailable }}
@@ -60,7 +65,6 @@
                     </tbody>
                 </table>
             </div>
-        <span class="text-xs text-gray-400">( {{item.items[0].timestamp}} )</span>
         </div>
     </div>
 </div>
@@ -84,8 +88,8 @@
 </script>
 
 <div class="text-center text-xs p-4 text-gray-700 bg-white">
-  <p class="text-gray-700">Tieto vapaista paikoista on HSL:n arvio viiden (5) minuutin tarkkuudella. Ylläpito ei vastaa tietojen oikeellisuudesta.</p>
-  <p>© 2023 Liipy</p>
+  <p class="text-gray-700">Tieto vapaista paikoista on HSL:n tuottama. Ylläpito ei vastaa tietojen oikeellisuudesta.</p>
+  <p>© 2024 Liipy</p>
   <div class="grid p-4">
     <span class="text-xs self-end">
         <button (click)="refreshPage()">

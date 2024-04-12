@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import packageJson from '../../../package.json';
 import { FacilityService } from '../services/facility-service';
 import { DOCUMENT } from '@angular/common';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'app-user-facilities',
@@ -13,6 +14,8 @@ export class UserFacilitiesComponent {
   appVersion: string = packageJson.version;
   private ngUnsubscribe = new Subject<void>;
   items: any = [] //TODO change any
+  /* Need to compare timestamp to current time with 5 minute timerange if the data is too old to trust*/
+  comparisonTime = dayjs().subtract(5, 'minute').format('DD.MM.YYYY HH:mm'); // TODO move this to own component
 
   constructor( private service: FacilityService, @Inject(DOCUMENT) private _document: Document ) {}
 
@@ -22,6 +25,11 @@ export class UserFacilitiesComponent {
     .subscribe((facilityDetails) => {
       this.items = facilityDetails
     });
+  }
+
+  getDateFromString(timestamp: string): Date {
+    const [day, month, year, hours, minutes] = timestamp.split(/[.: ]/);
+    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hours), parseInt(minutes));
   }
 
   ngOnDestroy() {
