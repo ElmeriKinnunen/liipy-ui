@@ -13,8 +13,6 @@ export class FacilitiesComponent {
   appVersion: string = packageJson.version;
   private ngUnsubscribe = new Subject<void>;
   items: any = [] // TODO change any
-  /* Need to compare timestamp to current time with 5 minute timerange if the data is too old to trust*/
-  comparisonTime = dayjs().subtract(5, 'minute').format('DD.MM.YYYY HH:mm'); // TODO move this to own component
 
   constructor( private service: FacilityService ) {}
 
@@ -24,11 +22,6 @@ export class FacilitiesComponent {
     .subscribe((facilityDetails) => {
       this.items = facilityDetails
     });
-  }
-
-  getDateFromString(timestamp: string): Date {
-    const [day, month, year, hours, minutes] = timestamp.split(/[.: ]/);
-    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hours), parseInt(minutes));
   }
 
   ngOnDestroy() {

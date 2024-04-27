@@ -13,6 +13,7 @@ import { UserFacilitiesComponent } from './user-facilities/user-facilities.compo
 import { FooterComponent } from './footer/footer.component';
 import { AreaFacilitiesComponent } from './area-facilities/area-facilities.component';
 import { FacilitiesListComponent } from './area-facilities/components/facilities-list/facilities-list.component';
+import { TimestampComponent } from './components/timestamp/timestamp.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FacilitiesListComponent } from './area-facilities/components/facilities
     UserFacilitiesComponent,
     FooterComponent,
     AreaFacilitiesComponent,
-    FacilitiesListComponent
+    FacilitiesListComponent,
+    TimestampComponent
   ],
   imports: [
     BrowserModule,
