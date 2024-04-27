@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import packageJson from '../../../package.json';
 import { FacilityService } from '../services/facility-service';
-import { DOCUMENT } from '@angular/common';
 import dayjs from 'dayjs';
 
 @Component({
@@ -17,7 +16,7 @@ export class UserFacilitiesComponent {
   /* Need to compare timestamp to current time with 5 minute timerange if the data is too old to trust*/
   comparisonTime = dayjs().subtract(5, 'minute').format('DD.MM.YYYY HH:mm'); // TODO move this to own component
 
-  constructor( private service: FacilityService, @Inject(DOCUMENT) private _document: Document ) {}
+  constructor( private service: FacilityService) {}
 
   ngOnInit() {
     this.service
@@ -35,9 +34,5 @@ export class UserFacilitiesComponent {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-  }
-
-  refreshPage() {
-    this._document.defaultView?.location.reload();
   }
 }

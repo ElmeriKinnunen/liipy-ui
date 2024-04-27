@@ -39,13 +39,15 @@
     </script>
   </div>
 
+  <div class="max-w-5xl mx-auto p-4 my-4 text-center rounded bg-green-500"><h3><b>Uutta!</b> Voit nyt katsoa pysäköintitiedot aluekohtaisesti! Klikkaa vain haluamasi listan otsikkoa ja voit esimerkiksi tallentaa näkymän laitteesi kot-valikkoon.</h3></div>
+
 <h3 class="text-xl font-semibold text-center">Liityntäpysäköinnin reaaliaikainen paikkatilanne</h3>
 <div *ngIf="items.length > 0; else loading">
-    <p class="max-w-5xl mx-auto p-4 text-xs">Kokeile myös lyhyempää <a class="underline underline-offset-2 hover:text-sky-600 text-sky-500" title="listausnäkymän beta -sivu" routerLink="beta">listausnäkymää</a>! (beta versiossa käytössä vain Länsiväylän kysytyimmät liityntäpysäköinnit)</p>
+    <!-- <p class="max-w-5xl mx-auto p-4 text-xs">Kokeile myös lyhyempää <a class="underline underline-offset-2 hover:text-sky-600 text-sky-500" title="listausnäkymän beta -sivu" routerLink="beta">listausnäkymää</a>! (beta versiossa käytössä vain Länsiväylän kysytyimmät liityntäpysäköinnit)</p> -->
     <div *ngFor="let item of items" class="max-w-5xl mx-auto pb-6 p-4">
         <div class="relative overflow-x-auto drop-shadow-lg rounded-xl">
             <div class="pt-3 pl-6 bg-white">
-                <h2 class="text-xl font-semibold">{{ item.listName }}</h2>
+                <h2 class="text-xl font-semibold" ><a class="underline underline-offset-2 hover:text-sky-600 text-sky-500" [routerLink]="['/area', item.areaId]">{{ item.listName }}</a></h2>
             </div>
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 bg-white border-b">

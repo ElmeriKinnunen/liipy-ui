@@ -73,32 +73,37 @@ export class FacilityService {
         statuses: ["IN_OPERATION"],
         ids: [1286, 1167, 1233, 992, 1006, 1009, 990, 755, 619],
         listName: "Metro (Länsi)",
+        areaId: "001"
       },
       {
         statuses: ["IN_OPERATION"],
         ids: [512, 1047, 517, 1091, 1031, 507, 497, 1090],
         listName: "Metro (Itä)",
+        areaId: '002'
       },
       {
         statuses: ["IN_OPERATION"],
         ids: [473],
         listName: "Lähijuna (Länsi)",
+        areaId: '003'
       },
       {
         statuses: ["IN_OPERATION"],
         ids: [751, 747, 738, 1, 308],
         listName: "Lähijuna (Pohjoinen)",
+        areaId: '004'
       },
       {
         statuses: ["IN_OPERATION"],
         ids: [303, 41],
         listName: "Lähijuna (Itä)",
+        areaId: '005'
       },
     ];
   
     const observables = lists.map((list) =>
       this.fetchFacilityList(list).pipe(
-        map((result) => ({ listName: list.listName as string, items: result }))
+        map((result) => ({ listName: list.listName as string, areaId: list.areaId, items: result }))
       )
     );
 
@@ -127,13 +132,40 @@ export class FacilityService {
     );
   }
 
-  fetchFacilityDetails(): Observable<IfacilityList[]> {
+  fetchAreaFacilities(areaId: string): Observable<IfacilityList[]> {
+    let ids: number[] = [];
+    let listName = "";
+
+    switch(areaId) {
+      case '001':
+        ids = [1286, 1167, 1233, 992, 1006, 1009, 990, 755, 619];
+        listName = "Metro (Länsi)";
+        break;
+      case '002':
+        ids = [512, 1047, 517, 1091, 1031, 507, 497, 1090];
+        listName = "Metro (Itä)";
+        break;
+      case '003':
+        ids = [473];
+        listName = "Lähijuna (Länsi)";
+        break;
+      case '004':
+        ids = [751, 747, 738, 1, 308];
+        listName = "Lähijuna (Pohjoinen)";
+        break;
+      case '005':
+        ids = [303, 41];
+        listName = "Lähijuna (Itä)";
+        break;
+      default:
+        break;
+    }
     
     const lists: Array<IfacilitiesInput> = [
       {
         statuses: ["IN_OPERATION"],
-        ids: [992, 990, 755, 619],
-        listName: "Metro (Länsi)",
+        ids: ids,
+        listName: listName,
       },
     ];
   

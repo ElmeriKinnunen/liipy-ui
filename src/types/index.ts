@@ -80,6 +80,7 @@ export interface ICrsName {
 
 export interface IFacilityListName {
     listName?: string;
+    areaId?: string;
 }
 export interface IfacilityList extends IFacilityListName { 
     items: Array<IfacilityListItem>;

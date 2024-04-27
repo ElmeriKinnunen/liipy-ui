@@ -11,7 +11,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { UserFacilitiesComponent } from './user-facilities/user-facilities.component';
 import { FooterComponent } from './footer/footer.component';
-import { FacilityComponent } from './facility/facility.component';
+import { AreaFacilitiesComponent } from './area-facilities/area-facilities.component';
+import { FacilitiesListComponent } from './area-facilities/components/facilities-list/facilities-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FacilityComponent } from './facility/facility.component';
     FacilitiesComponent,
     UserFacilitiesComponent,
     FooterComponent,
-    FacilityComponent
+    AreaFacilitiesComponent,
+    FacilitiesListComponent
   ],
   imports: [
     BrowserModule,
