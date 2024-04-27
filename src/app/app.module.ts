@@ -10,6 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { UserFacilitiesComponent } from './user-facilities/user-facilities.component';
+import { FooterComponent } from './footer/footer.component';
+import { FacilityComponent } from './facility/facility.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { UserFacilitiesComponent } from './user-facilities/user-facilities.compo
     CookieBannerComponent,
     PrivacyPolicyComponent,
     FacilitiesComponent,
-    UserFacilitiesComponent
+    UserFacilitiesComponent,
+    FooterComponent,
+    FacilityComponent
   ],
   imports: [
     BrowserModule,

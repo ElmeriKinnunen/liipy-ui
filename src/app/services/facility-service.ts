@@ -126,4 +126,25 @@ export class FacilityService {
       map((results) => results)
     );
   }
+
+  fetchFacilityDetails(): Observable<IfacilityList[]> {
+    
+    const lists: Array<IfacilitiesInput> = [
+      {
+        statuses: ["IN_OPERATION"],
+        ids: [992, 990, 755, 619],
+        listName: "Metro (Länsi)",
+      },
+    ];
+  
+    const observables = lists.map((list) =>
+      this.fetchFacilityList(list).pipe(
+        map((result) => ({ listName: list.listName as string, items: result }))
+      )
+    );
+
+    return forkJoin(observables).pipe(
+      map((results) => results)
+    );
+  }
 }
