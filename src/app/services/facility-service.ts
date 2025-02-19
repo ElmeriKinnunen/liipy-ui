@@ -77,7 +77,7 @@ export class FacilityService {
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [512, 1047, 517, 1091, 1031, 507, 497, 1090],
+        ids: [512, 517, 1091, 1031, 507, 497, 1090],
         listName: "Metro (Itä)",
         areaId: '002'
       },
@@ -142,7 +142,7 @@ export class FacilityService {
         listName = "Metro (Länsi)";
         break;
       case '002':
-        ids = [512, 1047, 517, 1091, 1031, 507, 497, 1090];
+        ids = [512, 517, 1091, 1031, 507, 497, 1090];
         listName = "Metro (Itä)";
         break;
       case '003':
