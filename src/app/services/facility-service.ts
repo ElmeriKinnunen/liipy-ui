@@ -89,18 +89,12 @@ export class FacilityService {
       },
       {
         statuses: ["IN_OPERATION"],
-        ids: [751, 747, 738, 1, 308],
+        ids: [751, 747, 738, 1, 308, 303, 41],
         listName: "Lähijuna (Pohjoinen)",
         areaId: '004'
       },
-      {
-        statuses: ["IN_OPERATION"],
-        ids: [303, 41],
-        listName: "Lähijuna (Itä)",
-        areaId: '005'
-      },
     ];
-  
+
     const observables = lists.map((list) =>
       this.fetchFacilityList(list).pipe(
         map((result) => ({ listName: list.listName as string, areaId: list.areaId, items: result }))
@@ -120,7 +114,7 @@ export class FacilityService {
         listName: "Metro (Länsi)",
       },
     ];
-  
+
     const observables = lists.map((list) =>
       this.fetchFacilityList(list).pipe(
         map((result) => ({ listName: list.listName as string, items: result }))
@@ -150,17 +144,13 @@ export class FacilityService {
         listName = "Lähijuna (Länsi)";
         break;
       case '004':
-        ids = [751, 747, 738, 1, 308];
+        ids = [751, 747, 738, 1, 308, 303, 41];
         listName = "Lähijuna (Pohjoinen)";
-        break;
-      case '005':
-        ids = [303, 41];
-        listName = "Lähijuna (Itä)";
         break;
       default:
         break;
     }
-    
+
     const lists: Array<IfacilitiesInput> = [
       {
         statuses: ["IN_OPERATION"],
@@ -168,7 +158,7 @@ export class FacilityService {
         listName: listName,
       },
     ];
-  
+
     const observables = lists.map((list) =>
       this.fetchFacilityList(list).pipe(
         map((result) => ({ listName: list.listName as string, items: result }))
