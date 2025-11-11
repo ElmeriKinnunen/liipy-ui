@@ -93,7 +93,7 @@ export const Facilities = () => {
               </h3>
               <p className="text-gray-600 text-sm">
                 Seuraa pysäköintipaikkojen saatavuutta reaaliajassa ja suunnittele
-                matkasi tehokkaasti.
+                matkasi tehokkaasti!
               </p>
             </div>
 
