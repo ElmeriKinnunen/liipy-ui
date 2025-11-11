@@ -1,0 +1,18 @@
+.banner-image {
+  width: 100%;
+  background-image: url("./assets/images/liityntapyskointi_bannerv2.jpg");
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .banner-image {
+    height: 250px;
+  }
+}
