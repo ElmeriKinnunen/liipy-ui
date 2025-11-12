@@ -47,7 +47,7 @@ export const CookieBanner = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={acceptCookies}
-                className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 Hyväksyn evästeet
               </button>
