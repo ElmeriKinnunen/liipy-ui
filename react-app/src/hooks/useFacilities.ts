@@ -8,10 +8,29 @@ import type {
   FacilityList,
   FacilityListItem,
   Facility,
+  Port,
 } from "../types";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { cacheUtils } from "../utils/cache";
+
+// Utility function to extract unique addresses from ports
+const getUniqueAddresses = (ports: Port[]): string => {
+  if (!ports || ports.length === 0) return "";
+
+  const addressStrings = ports
+    .map((port) => {
+      const street = port.address?.streetAddress?.fi || "";
+      const city = port.address?.city?.fi || "";
+      return street && city ? `${street}, ${city}` : street || city;
+    })
+    .filter(Boolean); // Remove empty strings
+
+  // Get unique addresses
+  const uniqueAddresses = [...new Set(addressStrings)];
+
+  return uniqueAddresses.join(" / ");
+};
 
 export const useFacilities = (variables: FacilitiesInput) => {
   const { data, loading, error } = useQuery<{ facilities: FacilitiesResponse }>(
@@ -56,7 +75,8 @@ export const useFacilityList = (args: FacilitiesInput) => {
 
     const fetchDetails = async () => {
       const promises = facilities.facilities.map(async (facility: Facility) => {
-        const response = await fetch(
+        // Fetch utilization data
+        const utilizationResponse = await fetch(
           new URL("graphql", "https://parking.fintraffic.fi/proxy/graphql/").toString(),
           {
             method: "POST",
@@ -82,31 +102,67 @@ export const useFacilityList = (args: FacilitiesInput) => {
           }
         );
 
-        const result = await response.json();
-        let facilityData = result.data?.facilityUtilization;
+        // Fetch details data
+        const detailsResponse = await fetch(
+          new URL("graphql", "https://parking.fintraffic.fi/proxy/graphql/").toString(),
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              query: `
+                query facilityDetails($id: ID!) {
+                  facilityDetails(id: $id) {
+                    ports {
+                      address {
+                        streetAddress {
+                          fi
+                        }
+                        city {
+                          fi
+                        }
+                      }
+                    }
+                  }
+                }
+              `,
+              variables: { id: facility.id },
+            }),
+          }
+        );
 
-        if (Array.isArray(facilityData) && facilityData.length > 0) {
-          facilityData = facilityData[0];
-        }
+        const utilizationResult = await utilizationResponse.json();
+        const detailsResult = await detailsResponse.json();
 
-        // Parse timestamp - use the timestamp field, NOT usage!
-        let timestamp = "";
-        if (facilityData?.timestamp) {
-          timestamp = dayjs(facilityData.timestamp).format("DD.MM.YYYY HH:mm");
-        }
+        const facilityData = utilizationResult.data?.facilityUtilization;
+        const facilityDetails = detailsResult.data?.facilityDetails;
 
-        return {
-          id: facility.id,
-          name: facility.name.fi,
-          builtCapacityCar: facility.builtCapacity?.CAR,
-          builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
-          spacesAvailable: facilityData?.spacesAvailable,
-          timestamp,
-        };
+        // Extract unique addresses
+        const address = facilityDetails?.ports ? getUniqueAddresses(facilityDetails.ports) : "";
+
+        // Handle multiple usage types by creating separate entries
+        // Filter to show only PARK_AND_RIDE facilities
+        const dataArray = Array.isArray(facilityData) ? facilityData : facilityData ? [facilityData] : [];
+
+        return dataArray
+          .filter((data) => data.usage === "PARK_AND_RIDE")
+          .map((data) => ({
+            id: `${facility.id}-${data.usage}`,
+            name: facility.name.fi,
+            builtCapacityCar: facility.builtCapacity?.CAR,
+            builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
+            spacesAvailable: data.spacesAvailable,
+            capacity: data.capacity,
+            usage: data.usage,
+            timestamp: data.timestamp ? dayjs(data.timestamp).format("DD.MM.YYYY HH:mm") : "",
+            address,
+          }));
       });
 
       const results = await Promise.all(promises);
-      setFacilityDetails(results);
+      // Flatten array of arrays into single array
+      setFacilityDetails(results.flat());
       setLoading(false);
     };
 
@@ -187,7 +243,8 @@ export const useAllFacilityDetails = () => {
         const facilities = result.data?.facilities?.facilities || [];
 
         const detailPromises = facilities.map(async (facility: Facility) => {
-          const detailResponse = await fetch(
+          // Fetch utilization data
+          const utilizationResponse = await fetch(
             new URL("graphql", "https://parking.fintraffic.fi/proxy/graphql/").toString(),
             {
               method: "POST",
@@ -213,26 +270,67 @@ export const useAllFacilityDetails = () => {
             }
           );
 
-          const detailResult = await detailResponse.json();
-          let facilityData = detailResult.data?.facilityUtilization;
+          // Fetch details data
+          const detailsResponse = await fetch(
+            new URL("graphql", "https://parking.fintraffic.fi/proxy/graphql/").toString(),
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                query: `
+                  query facilityDetails($id: ID!) {
+                    facilityDetails(id: $id) {
+                      ports {
+                        address {
+                          streetAddress {
+                            fi
+                          }
+                          city {
+                            fi
+                          }
+                        }
+                      }
+                    }
+                  }
+                `,
+                variables: { id: facility.id },
+              }),
+            }
+          );
 
-          if (Array.isArray(facilityData) && facilityData.length > 0) {
-            facilityData = facilityData[0];
-          }
+          const utilizationResult = await utilizationResponse.json();
+          const detailsResult = await detailsResponse.json();
 
-          return {
-            id: facility.id,
-            name: facility.name.fi,
-            builtCapacityCar: facility.builtCapacity?.CAR,
-            builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
-            spacesAvailable: facilityData?.spacesAvailable,
-            timestamp: facilityData?.timestamp
-              ? dayjs(facilityData.timestamp).format("DD.MM.YYYY HH:mm")
-              : "",
-          };
+          const facilityData = utilizationResult.data?.facilityUtilization;
+          const facilityDetails = detailsResult.data?.facilityDetails;
+
+          // Extract unique addresses
+          const address = facilityDetails?.ports ? getUniqueAddresses(facilityDetails.ports) : "";
+
+          // Handle multiple usage types by creating separate entries
+          // Filter to show only PARK_AND_RIDE facilities
+          const dataArray = Array.isArray(facilityData) ? facilityData : facilityData ? [facilityData] : [];
+
+          return dataArray
+            .filter((data) => data.usage === "PARK_AND_RIDE")
+            .map((data) => ({
+              id: `${facility.id}-${data.usage}`,
+              name: facility.name.fi,
+              builtCapacityCar: facility.builtCapacity?.CAR,
+              builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
+              spacesAvailable: data.spacesAvailable,
+              capacity: data.capacity,
+              usage: data.usage,
+              timestamp: data.timestamp ? dayjs(data.timestamp).format("DD.MM.YYYY HH:mm") : "",
+              address,
+            }));
         });
 
-        const items = await Promise.all(detailPromises);
+        const itemsArrays = await Promise.all(detailPromises);
+        // Flatten array of arrays into single array
+        const items = itemsArrays.flat();
 
         return {
           listName: config.listName,
@@ -325,7 +423,8 @@ export const useAreaFacilities = (areaId: string) => {
       const facilities = result.data?.facilities?.facilities || [];
 
       const detailPromises = facilities.map(async (facility: Facility) => {
-        const detailResponse = await fetch(
+        // Fetch utilization data
+        const utilizationResponse = await fetch(
           new URL("graphql", "https://parking.fintraffic.fi/proxy/graphql/").toString(),
           {
             method: "POST",
@@ -351,26 +450,67 @@ export const useAreaFacilities = (areaId: string) => {
           }
         );
 
-        const detailResult = await detailResponse.json();
-        let facilityData = detailResult.data?.facilityUtilization;
+        // Fetch details data
+        const detailsResponse = await fetch(
+          new URL("graphql", "https://parking.fintraffic.fi/proxy/graphql/").toString(),
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              query: `
+                query facilityDetails($id: ID!) {
+                  facilityDetails(id: $id) {
+                    ports {
+                      address {
+                        streetAddress {
+                          fi
+                        }
+                        city {
+                          fi
+                        }
+                      }
+                    }
+                  }
+                }
+              `,
+              variables: { id: facility.id },
+            }),
+          }
+        );
 
-        if (Array.isArray(facilityData) && facilityData.length > 0) {
-          facilityData = facilityData[0];
-        }
+        const utilizationResult = await utilizationResponse.json();
+        const detailsResult = await detailsResponse.json();
 
-        return {
-          id: facility.id,
-          name: facility.name.fi,
-          builtCapacityCar: facility.builtCapacity?.CAR,
-          builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
-          spacesAvailable: facilityData?.spacesAvailable,
-          timestamp: facilityData?.timestamp
-            ? dayjs(facilityData.timestamp).format("DD.MM.YYYY HH:mm")
-            : "",
-        };
+        const facilityData = utilizationResult.data?.facilityUtilization;
+        const facilityDetails = detailsResult.data?.facilityDetails;
+
+        // Extract unique addresses
+        const address = facilityDetails?.ports ? getUniqueAddresses(facilityDetails.ports) : "";
+
+        // Handle multiple usage types by creating separate entries
+        // Filter to show only PARK_AND_RIDE facilities
+        const dataArray = Array.isArray(facilityData) ? facilityData : facilityData ? [facilityData] : [];
+
+        return dataArray
+          .filter((data) => data.usage === "PARK_AND_RIDE")
+          .map((data) => ({
+            id: `${facility.id}-${data.usage}`,
+            name: facility.name.fi,
+            builtCapacityCar: facility.builtCapacity?.CAR,
+            builtCapacityElectricCar: facility.builtCapacity?.ELECTRIC_CAR || 0,
+            spacesAvailable: data.spacesAvailable,
+            capacity: data.capacity,
+            usage: data.usage,
+            timestamp: data.timestamp ? dayjs(data.timestamp).format("DD.MM.YYYY HH:mm") : "",
+            address,
+          }));
       });
 
-      const items = await Promise.all(detailPromises);
+      const itemsArrays = await Promise.all(detailPromises);
+      // Flatten array of arrays into single array
+      const items = itemsArrays.flat();
 
       const newList = {
         listName: config.listName,

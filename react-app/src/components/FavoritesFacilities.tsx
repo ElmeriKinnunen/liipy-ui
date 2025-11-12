@@ -46,17 +46,19 @@ export const FavoritesFacilities = ({
               key={facility.id}
               className="bg-white border border-yellow-300 rounded-2xl p-3 sm:p-5 shadow-sm"
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
-                {/* Facility Name & Timestamp */}
-                <div className="flex-1 min-w-0 flex items-start gap-2 sm:gap-3">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 break-words">
-                      {facility.name}
-                    </h3>
-                    {facility.timestamp && (
-                      <Timestamp timestamp={facility.timestamp} />
-                    )}
-                  </div>
+              <div className="flex flex-col gap-3">
+                {/* Main content: Name & Stats */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+                  {/* Facility Name & Timestamp */}
+                  <div className="flex-1 min-w-0 flex items-start gap-2 sm:gap-3">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 break-words">
+                        {facility.name}
+                      </h3>
+                      {facility.timestamp && (
+                        <Timestamp timestamp={facility.timestamp} />
+                      )}
+                    </div>
                   {/* Remove from favorites button */}
                   <button
                     onClick={(e) => {
@@ -114,15 +116,17 @@ export const FavoritesFacilities = ({
                     </div>
                   </div>
 
-                  {/* Total Capacity */}
-                  <div className="text-center border-l border-gray-200 pl-2 sm:pl-4 md:pl-6">
-                    <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mb-0.5 sm:mb-1 font-medium">
-                      Kapasiteetti
+                  {/* Total Capacity - Show actual capacity if available */}
+                  {facility.capacity !== undefined && (
+                    <div className="text-center border-l border-gray-200 pl-2 sm:pl-4 md:pl-6">
+                      <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mb-0.5 sm:mb-1 font-medium">
+                        Yhteensä
+                      </div>
+                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-700">
+                        {facility.capacity}
+                      </div>
                     </div>
-                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-700">
-                      {facility.builtCapacityCar ?? "-"}
-                    </div>
-                  </div>
+                  )}
 
                   {/* Electric Capacity */}
                   {facility.builtCapacityElectricCar !== undefined &&
@@ -149,7 +153,17 @@ export const FavoritesFacilities = ({
                         </div>
                       </div>
                     )}
+                  </div>
                 </div>
+
+                {/* Footer: Address */}
+                {facility.address && (
+                  <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                    <p className="text-xs text-gray-500">
+                      📍 {facility.address}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           ))}

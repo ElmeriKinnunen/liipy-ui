@@ -35,3 +35,20 @@ export const GET_FACILITY = gql`
     }
   }
 `;
+
+export const GET_FACILITY_DETAILS = gql`
+  query facilityDetails($id: ID!) {
+    facilityDetails(id: $id) {
+      ports {
+        address {
+          streetAddress {
+            fi
+          }
+          city {
+            fi
+          }
+        }
+      }
+    }
+  }
+`;

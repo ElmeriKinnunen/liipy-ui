@@ -93,5 +93,21 @@ export interface FacilityListItem {
   builtCapacityCar?: number;
   builtCapacityElectricCar?: number;
   spacesAvailable?: number;
+  capacity?: number;
+  usage?: string;
   timestamp?: string;
+  address?: string;
+}
+
+export interface Address {
+  streetAddress: LocalizedObject;
+  city: LocalizedObject;
+}
+
+export interface Port {
+  address: Address;
+}
+
+export interface FacilityDetailsResponse {
+  ports: Port[];
 }
