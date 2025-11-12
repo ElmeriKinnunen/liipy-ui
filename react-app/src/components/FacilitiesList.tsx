@@ -48,18 +48,18 @@ export const FacilitiesList = ({
         </div>
 
         {/* Facilities Grid */}
-        <div className="p-6">
-          <div className="grid gap-4">
+        <div className="p-3 sm:p-6">
+          <div className="grid gap-3 sm:gap-4">
             {facilityList.items.map((facility) => (
               <div
                 key={facility.id}
-                className="group bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-2xl p-5 hover:shadow-card hover:border-primary-200 transition-all duration-200"
+                className="group bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-2xl p-3 sm:p-5 hover:shadow-card hover:border-primary-200 transition-all duration-200"
               >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
                   {/* Facility Name & Timestamp */}
-                  <div className="flex-1 min-w-0 flex items-start gap-3">
+                  <div className="flex-1 min-w-0 flex items-start gap-2 sm:gap-3">
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1 truncate">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 break-words">
                         {facility.name}
                       </h3>
                       {facility.timestamp && (
@@ -74,7 +74,7 @@ export const FacilitiesList = ({
                           e.stopPropagation();
                           onToggleFavorite(String(facility.id));
                         }}
-                        className="flex-shrink-0 p-2 hover:bg-primary-50 rounded-full transition-colors"
+                        className="flex-shrink-0 p-1 sm:p-2 hover:bg-primary-50 rounded-full transition-colors"
                         aria-label={
                           isFavorite(String(facility.id))
                             ? "Poista suosikeista"
@@ -83,7 +83,7 @@ export const FacilitiesList = ({
                       >
                         {isFavorite(String(facility.id)) ? (
                           <svg
-                            className="w-6 h-6 text-yellow-500"
+                            className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >
@@ -91,7 +91,7 @@ export const FacilitiesList = ({
                           </svg>
                         ) : (
                           <svg
-                            className="w-6 h-6 text-gray-400 hover:text-yellow-500 transition-colors"
+                            className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 hover:text-yellow-500 transition-colors"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -109,15 +109,15 @@ export const FacilitiesList = ({
                   </div>
 
                   {/* Stats */}
-                  <div className="flex items-center gap-3 sm:gap-6">
+                  <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
                     {/* Available Spaces - Large for easy reading while driving */}
                     <div className="text-center">
-                      <div className="text-xs sm:text-sm text-gray-500 mb-1 font-medium">
+                      <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mb-0.5 sm:mb-1 font-medium">
                         Vapaana
                       </div>
-                      <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
                         <div
-                          className={`text-4xl sm:text-5xl font-black tracking-tight ${
+                          className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight ${
                             (facility.spacesAvailable ?? 0) > 10
                               ? "text-green-600"
                               : (facility.spacesAvailable ?? 0) > 5
@@ -129,7 +129,7 @@ export const FacilitiesList = ({
                         </div>
                         <div className="flex flex-col">
                           <svg
-                            className={`w-6 h-6 sm:w-8 sm:h-8 ${
+                            className={`w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 ${
                               (facility.spacesAvailable ?? 0) > 10
                                 ? "text-green-500"
                                 : (facility.spacesAvailable ?? 0) > 5
@@ -146,11 +146,11 @@ export const FacilitiesList = ({
                     </div>
 
                     {/* Total Capacity - Always visible */}
-                    <div className="text-center border-l border-gray-200 pl-3 sm:pl-6">
-                      <div className="text-xs sm:text-sm text-gray-500 mb-1 font-medium">
+                    <div className="text-center border-l border-gray-200 pl-2 sm:pl-4 md:pl-6">
+                      <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mb-0.5 sm:mb-1 font-medium">
                         Kapasiteetti
                       </div>
-                      <div className="text-xl sm:text-2xl font-bold text-gray-700">
+                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-700">
                         {facility.builtCapacityCar ?? "-"}
                       </div>
                     </div>
@@ -158,10 +158,10 @@ export const FacilitiesList = ({
                     {/* Electric Capacity - Always visible when > 0 */}
                     {facility.builtCapacityElectricCar !== undefined &&
                       facility.builtCapacityElectricCar > 0 && (
-                        <div className="text-center border-l border-gray-200 pl-3 sm:pl-6">
-                          <div className="text-xs sm:text-sm text-gray-500 mb-1 font-medium flex items-center justify-center gap-1">
+                        <div className="text-center border-l border-gray-200 pl-2 sm:pl-4 md:pl-6">
+                          <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mb-0.5 sm:mb-1 font-medium flex items-center justify-center gap-0.5 sm:gap-1">
                             <svg
-                              className="w-3 h-3 sm:w-4 sm:h-4 text-green-600"
+                              className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-green-600"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -173,9 +173,9 @@ export const FacilitiesList = ({
                                 d="M13 10V3L4 14h7v7l9-11h-7z"
                               />
                             </svg>
-                            Lataus
+                            <span>Lataus</span>
                           </div>
-                          <div className="text-xl sm:text-2xl font-bold text-green-600">
+                          <div className="text-lg sm:text-xl md:text-2xl font-bold text-green-600">
                             {facility.builtCapacityElectricCar}
                           </div>
                         </div>

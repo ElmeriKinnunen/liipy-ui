@@ -1,4 +1,3 @@
 Always use context7 when I need code generation, setup or configuration steps, or
 library/API documentation. This means you should automatically use the Context7 MCP
-tools to resolve library id and get library docs without me having to explicitly ask. 
-Always say what model you use when the job is done.
+tools to resolve library id and get library docs without me having to explicitly ask.
