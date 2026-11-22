@@ -55,25 +55,6 @@ export const FavoritesFacilities = ({
                       <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 break-words">
                         {facility.name}
                       </h3>
-                      {String(facility.id).startsWith("990") && (
-                        <div className="flex items-center gap-1.5 text-amber-600 bg-amber-50 px-2 py-1 rounded-md text-[10px] sm:text-xs font-medium mb-2 border border-amber-100 w-fit">
-                          <svg
-                            className="w-3.5 h-3.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                            />
-                          </svg>
-                          Vapaiden paikkojen määrä saattaa näkyä väärin
-                          tietolähteestä johtuen
-                        </div>
-                      )}
                       {facility.timestamp && (
                         <Timestamp timestamp={facility.timestamp} />
                       )}
@@ -108,9 +89,7 @@ export const FavoritesFacilities = ({
                     <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
                       <div
                         className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight ${
-                          String(facility.id).startsWith("990")
-                            ? "text-red-600"
-                            : (facility.spacesAvailable ?? 0) > 10
+                          (facility.spacesAvailable ?? 0) > 10
                             ? "text-green-600"
                             : (facility.spacesAvailable ?? 0) > 5
                             ? "text-yellow-600"
